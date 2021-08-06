@@ -1,43 +1,41 @@
-const homePage = require('express').Router();
+const Router = require('express').Router();
 const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 // const uuid = require('../helpers/uuid');
 
 
-homePage.get('/', (req, res) => {
-  console.info(`${req.method} request received for feedback`);
+Router.get('/notes', (req, res) => {
+  console.info(`${req.method} request received for feedback.`);
 
-  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+  readFromFile('/db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-// POST Route for submitting feedback
-// homePage.post('/api/notes', (req, res) => {
+//POST Route for submitting feedback
+// Router.post('/notes', (req, res) => {
 //   // Log that a POST request was received
-//   console.info(`${req.method} request received to submit feedback`);
+//   console.info(`${req.method} request received to submit feedback02.`);
 
-  // Destructuring assignment for the items in req.body
-//   const { email, feedbackType, feedback } = req.body;
+// // Destructuring assignment for the items in req.body
+//   const { Title , Text } = req.body;
 
 //   // If all the required properties are present
-//   if (email && feedbackType && feedback) {
+//   if (Title && Text ) {
 //     // Variable for the object we will save
-//     const newFeedback = {
-//       email,
-//       feedbackType,
-//       feedback,
-//       feedback_id: uuid(),
-    // };
+//     const newNote = {
+//       title: noteTitle.value,
+//       text: noteText.value,
+//     };
 
-//     readAndAppend(newFeedback, './db/feedback.json');
+//     readAndAppend(newNote, '/db/db.json');
 
 //     const response = {
 //       status: 'success',
-//       body: newFeedback,
+//       body: newNote,
 //     };
 
 //     res.json(response);
 //   } else {
-//     res.json('Error in posting feedback');
+//     res.json('Error in posting feedback03.');
 //   }
 //  });
 
-module.exports = homePage;
+module.exports = Router;
