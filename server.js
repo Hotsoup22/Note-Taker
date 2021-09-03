@@ -1,32 +1,26 @@
 const express = require('express');
-const path = require('path');
-const { clog } = require('./middleware/clog');
-const api = require('./routes/api/index');
-const dbJson = require('./db/db.json')
+// const path = require('path');
+const api= require( './routes/index' );
+const notesRouter = require('./routes/notes');
+// Open port on Heroku or default to 3001;
 const PORT = process.env.port || 3001;
 
 
 const app = express();
-// Import custom middleware, "cLog"
-app.use(clog);
+
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', api);
+app.use('/api', notesRouter);
+app.use( '/', api);
 
 app.use(express.static('public'));
 
-// GET Route for homepage
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
-);
 
-// GET Route for feedback page
-app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/notes.html'))
-);
- 
+
+console.log("server.js is loading")
+
 
 
 app.listen(PORT, () =>
