@@ -3,7 +3,7 @@ const express = require('express');
 const api= require( './routes/index' );
 const notesRouter = require('./routes/notes');
 // Open port on Heroku or default to 3001;
-const PORT = process.env.port || 3001;
+const port = process.env.PORT || 3001;
 
 
 const app = express();
@@ -23,6 +23,6 @@ console.log("server.js is loading")
 
 
 
-app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT} 🚀`)
+app.listen(port, () =>
+  console.log(`App listening at http://localhost:${port} 🚀`)
 );
